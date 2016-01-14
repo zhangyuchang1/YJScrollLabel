@@ -16,16 +16,16 @@
 @property (nonatomic,assign) CGFloat space;
 /// 字体颜色. 默认为白色
 @property (nonatomic,retain) UIColor *textColor;
-/// 滚动速度，由1-10，速度由慢到快，默认为5
-@property (nonatomic,assign) NSInteger speed;
+
 /**
  *  初始化方法
  *
  *  @param frame 尺寸
  *  @param title 要显示的文本
+ *  @param speed 滚动速度，由1-10，速度由慢到快，默认为5
  *
  *  @return ALDScrollLabel对象
  */
--(instancetype)initWithFrame:(CGRect)frame title:(NSString *)title;
+-(instancetype)initWithFrame:(CGRect)frame title:(NSString *)title speed:(NSInteger)speed;
 
 @end

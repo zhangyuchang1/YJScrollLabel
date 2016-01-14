@@ -16,10 +16,12 @@
 @property (nonatomic,retain) UILabel *label_1;
 @property (nonatomic,retain) UILabel *label_2;
 @property (nonatomic,assign) BOOL     isAnimating;
+/// 滚动速度，由1-10，速度由慢到快，默认为5
+@property (nonatomic,assign) NSInteger speed;
 @end
 @implementation YJScrollLabel
 
--(instancetype)initWithFrame:(CGRect)frame title:(NSString *)title
+-(instancetype)initWithFrame:(CGRect)frame title:(NSString *)title speed:(NSInteger)speed
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -41,6 +43,7 @@
         [self addSubview:_label_2];
         self.clipsToBounds = YES;
         
+        _speed = speed;
         CGFloat width = [self getLabelWidth];
         [_label_1 setFrame:CGRectMake(0, 0, width, self.height)];
         
@@ -72,15 +75,16 @@
     self.isAnimating = YES;
     
     CGFloat interVal = SCROLL_SPEED_INTERVAL;
+    if (_speed == 0) {
+        _speed = 5;
+    }
     if (_speed >10) {
         _speed = 10;
     }
     if (_speed <1) {
         _speed = 1;
     }
-    if (_speed) {
         interVal = SCROLL_SPEED_INTERVAL * 2 * (_speed/10.0);
-    }
     
     [UIView animateWithDuration:interVal delay:0 options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionRepeat animations:^{
         
